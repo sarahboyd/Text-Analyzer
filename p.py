@@ -9,6 +9,17 @@ from Tkinter import *
 from tkFileDialog import *
 import tkMessageBox
 import stopwords
+import csv
+import exportcsv
+
+
+
+def csv_writer (data, path):
+	with open (path, "wb") as csv_file:
+		writer = csv.writer(csv_file, delimiter = ',')
+		for line in data:
+			writer.writerow(line)
+
 
 print "Sarahs project now....\n\n"
 
@@ -57,6 +68,7 @@ def count_words(word_list):
 			else:
 				word_count[word] = 1
 
+	global sorted_count
 	sorted_count = sorted(word_count.items(),key=lambda x:x[1], reverse=TRUE)
 
 	print sorted_count
@@ -77,6 +89,12 @@ def get_stop_words():
 		print "here"
 	else:
 		open_file()
+
+def export():
+	export_dialog = exportcsv.Export(root)
+	root.wait_window(export_dialog.top)
+	print "exporting to.." + export_dialog.dirname
+	csv_writer(sorted_count, export_dialog.dirname+"/" + export_dialog.saveName)
 
 
 
@@ -108,6 +126,7 @@ def yview(*args):
 	word_list_box.yview(*args)
 	count_list_box.yview(*args)
 
+
 center_window(600,300)
 root.title("Title goes here")
 
@@ -124,6 +143,7 @@ menubar.add_cascade(label="File", menu=filemenu)
 #editmenu
 editmenu = Menu(menubar, tearoff=0)
 editmenu.add_command(label="Stop Words", command = get_stop_words)
+editmenu.add_command(label="Export to CSV", command = export)
 menubar.add_cascade(label="Edit", menu=editmenu)
 
 #helpmenu
@@ -179,4 +199,8 @@ pane.add(bottomframe)
 pane.pack()
 
 root.config(menu=menubar)
+
+root.lift()
+root.call('wm', 'attributes', '.', '-topmost', True)
+root.after_idle(root.call, 'wm', 'attributes', '.', '-topmost', False)
 root.mainloop()

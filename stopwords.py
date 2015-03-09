@@ -94,8 +94,6 @@ class MyDialog:
 		pane.add(rightFrame)
 		pane.pack()
 
-		pane.pack()
-
 
 	def send(self):
 		self.top.destroy
