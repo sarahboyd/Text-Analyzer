@@ -1,3 +1,10 @@
+# =============================================================================
+#     Author: Sarah Boyd
+#     Date:   April 5, 2015
+#     File:  stopwords.py
+#     Description: This creates the stopwords window
+# =============================================================================
+
 import Tkinter as tk
 import ttk
 from Tkinter import *

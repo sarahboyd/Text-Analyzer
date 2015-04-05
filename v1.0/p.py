@@ -1,5 +1,12 @@
 #!/usr/bin/python
 
+# =============================================================================
+#     Author: Sarah Boyd
+#     Date:   April 5, 2015
+#     File:  p.py
+#     Description: This is the main file for the Text Analyzer app
+# =============================================================================
+
 from __future__ import division
 from string import punctuation
 import re

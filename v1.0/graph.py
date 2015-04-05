@@ -1,3 +1,10 @@
+# =============================================================================
+#     Author: Sarah Boyd
+#     Date:   April 5, 2015
+#     File:  grpah.py
+#     Description: This creates the segment graph
+# =============================================================================
+
 import Tkinter as tk
 import ttk
 from Tkinter import *
