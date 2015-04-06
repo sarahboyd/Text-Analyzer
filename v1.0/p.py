@@ -24,7 +24,7 @@ import webbrowser
 
 
 
-print "Sarahs project now....\n\n"
+#print "Sarahs project now....\n\n"
 
 root = tk.Tk()
 
@@ -54,7 +54,7 @@ def checkStop(word):
 
 #open file to analyze
 def open_file():
-	print filename.get()
+	#print filename.get()
 
 	with open (str(filename.get())) as myfile:
 		data = myfile.read().replace('\n','')
@@ -82,7 +82,7 @@ def get_context (word):
 		outstring += str(n[2]).center(len(n[2])+6)
 		outstring += ' '.join(n[3:])
 		context_list_box.insert(END, outstring)
-		#print outstring
+		##print outstring
 
 #create keyword dictionary
 def keywords (word_list):
@@ -98,7 +98,7 @@ def keywords (word_list):
 #get selected word from wordlist
 def get_selection():
 	sel = word_list_box.curseselection()
-	print str(sel)
+	#print str(sel)
 
 #open file dialog
 def get_file():
@@ -112,7 +112,7 @@ def count_words(word_list):
 	count_list_box.delete(0,END)
 
 	word_count = {}
-	print stopwords.stop_list
+	#print stopwords.stop_list
 
 	for word in word_list:
 		if not checkStop(word):
@@ -124,7 +124,7 @@ def count_words(word_list):
 	global sorted_count
 	sorted_count = sorted(word_count.items(),key=lambda x:x[1], reverse=TRUE)
 
-	print sorted_count
+	#print sorted_count
 
 	for word in sorted_count:
 		word_list_box.insert(END, word[0])
@@ -138,11 +138,8 @@ def get_stop_words():
 	#stop_fname = askopenfilename(parent=root)
 	stop_dialog = stopwords.MyDialog(root)
 	root.wait_window(stop_dialog.top)
-	
-	if str(filename.get()) is  str(default_filename):
-		print "here"
-	else:
-		open_file()
+
+	open_file()
 
 #function to write to a csv file
 def csv_writer (data, path):
@@ -155,7 +152,7 @@ def csv_writer (data, path):
 def export():
 	export_dialog = exportcsv.Export(root)
 	root.wait_window(export_dialog.top)
-	print "exporting to.." + export_dialog.dirname
+	#print "exporting to.." + export_dialog.dirname
 	csv_writer(sorted_count, export_dialog.dirname+"/" + export_dialog.saveName+".csv")
 
 #sync scrollbars
@@ -178,7 +175,7 @@ def OnSelect(event):
 	widget=event.widget
 	selection=widget.curselection()
 	value = widget.get(selection[0])
-	print "selection:", selection, ": '%s'" %value
+	#print "selection:", selection, ": '%s'" %value
 	get_context(value)
 	segmentList(10,value)
 
@@ -186,7 +183,7 @@ def OnSelect(event):
 def segmentList(sz,word):
     #newlist = [word_list[i:i+sz] for i in xrange(0, len(word_list), sz)]
     newlist = [ word_list[i::sz] for i in xrange(sz) ]
-    print [seg.count(word) for seg in newlist]
+    #print [seg.count(word) for seg in newlist]
     segGraph.update_graph([seg.count(word) for seg in newlist], word)
 
 
